@@ -1,0 +1,81 @@
+name: Manual Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Do dry-run? (true/false)"
+        required: true
+        default: "true"
+
+permissions:
+  id-token: write
+  contents: write
+
+jobs:
+  release:
+    name: 🚀 Release package
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "23"
+          registry-url: "https://registry.npmjs.org/"
+
+      - name: Install dependencies
+        run: npm ci || npm install # fallback if package-lock is missing
+
+      - name: Update to latest openapi.json
+        run: npm run update
+
+      - name: Run tests
+        run: npm run test
+
+      - name: Build
+        run: npm run build
+
+      - name: Get version from package.json
+        id: get_version
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          echo "VER=$VERSION" >> $GITHUB_OUTPUT
+
+      - name: Commit release bump
+        run: |
+          V=${{ steps.get_version.outputs.VER }}
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add .
+          if ! git diff --cached --quiet; then
+            git commit -m "prepare release $V"
+            git push origin HEAD:${{ github.ref_name }}
+          else
+            echo "⏭ nothing to commit, continuing…"
+          fi
+
+      - name: Create & push tag
+        if: ${{ github.event.inputs.dry_run == 'false' }}
+        run: |
+          V=${{ steps.get_version.outputs.VER }}
+          git tag -a "v$V" -m "Release v$V"
+          git push origin "v$V"
+
+      - name: Publish to npm
+        run: |
+          if [ "${{ github.event.inputs.dry_run }}" = "false" ]; then
+            echo "=== REAL PUBLISH ==="
+            # --provenance links this build to this GitHub Action run
+            npm publish --access public --provenance
+          else
+            echo "=== DRY RUN ==="
+            npm publish --dry-run --access public
+          fi
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} 
