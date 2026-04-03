@@ -1,17 +1,24 @@
 {
   "name": "@pg-atlas/sdk",
-  "version": "1.0.0",
-  "description": "SDK for PG Atlas API",
+  "version": "0.3.0",
+  "description": "TypeScript SDK for the PG Atlas API",
   "type": "module",
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.js"
+    }
+  },
   "files": [
-    "dist"
+    "dist/**/*"
   ],
   "scripts": {
     "build": "tsc",
+    "generate": "openapi-ts",
+    "update": "node ./scripts/update-api.cjs && npm run generate",
     "test": "vitest run",
-    "update": "echo 'Updating openapi...' && touch openapi.json",
     "prepublishOnly": "npm run build"
   },
   "keywords": [
@@ -21,9 +28,10 @@
     "sdk"
   ],
   "author": "SCF-Public-Goods-Maintenance",
-  "license": "MIT",
+  "license": "MPL-2.0",
   "devDependencies": {
-    "typescript": "^5.0.0",
-    "vitest": "^1.0.0"
+    "@hey-api/openapi-ts": "^0.90.10",
+    "typescript": "^5.5.3",
+    "vitest": "^1.4.0"
   }
 }
