@@ -26,7 +26,8 @@ function readJson(filePath) {
  */
 function extractGeneratedOperations(sourceText) {
   const operationMap = new Map();
-  const regex = /export const (\w+)\s*=\s*<[\s\S]*?\)\.(get|post|put|patch|delete)<[\s\S]*?\{ url: '([^']+)'/g;
+  const regex =
+    /export const (\w+)\s*=\s*<[\s\S]*?\)\.(get|post|put|patch|delete)<[\s\S]*?\{ url: '([^']+)'/g;
 
   let match;
   while ((match = regex.exec(sourceText)) !== null) {
@@ -38,7 +39,7 @@ function extractGeneratedOperations(sourceText) {
   }
 
   return Array.from(operationMap.values()).sort((a, b) =>
-    a.functionName.localeCompare(b.functionName)
+    a.functionName.localeCompare(b.functionName),
   );
 }
 
@@ -57,11 +58,14 @@ function samplePathTokenValue(token) {
  */
 function buildOperationCase(operation) {
   const pathValues = {};
-  const expectedPath = operation.pathTemplate.replace(/\{([^}]+)\}/g, (_, token) => {
-    const value = samplePathTokenValue(token);
-    pathValues[token] = value;
-    return encodeURIComponent(String(value));
-  });
+  const expectedPath = operation.pathTemplate.replace(
+    /\{([^}]+)\}/g,
+    (_, token) => {
+      const value = samplePathTokenValue(token);
+      pathValues[token] = value;
+      return encodeURIComponent(String(value));
+    },
+  );
 
   const requestOptions = {};
   if (Object.keys(pathValues).length > 0) {
@@ -187,7 +191,9 @@ function main() {
   const operations = extractGeneratedOperations(sdkSource);
 
   if (operations.length === 0) {
-    throw new Error("No generated SDK operations found in src/generated/sdk.gen.ts.");
+    throw new Error(
+      "No generated SDK operations found in src/generated/sdk.gen.ts.",
+    );
   }
 
   const operationCases = operations.map(buildOperationCase);
@@ -195,7 +201,9 @@ function main() {
   fs.writeFileSync(TEST_PATH, testContent, "utf8");
 
   console.log(
-    `Rewrote ${path.relative(ROOT, TEST_PATH)} with ${operationCases.length} generated operation tests.`
+    `Rewrote ${path.relative(ROOT, TEST_PATH)} with ${
+      operationCases.length
+    } generated operation tests.`,
   );
 }
 

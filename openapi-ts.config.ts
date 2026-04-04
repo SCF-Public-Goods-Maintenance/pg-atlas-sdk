@@ -7,7 +7,7 @@ type ApiConfig = {
 };
 
 const apiConfig = JSON.parse(
-  readFileSync(new URL("./src/api-config.json", import.meta.url), "utf8")
+  readFileSync(new URL("./src/api-config.json", import.meta.url), "utf8"),
 ) as ApiConfig;
 
 const apiBaseUrl = apiConfig.apiBaseUrl.replace(/\/+$/, "");

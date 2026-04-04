@@ -52,12 +52,10 @@ console.log(data?.repository);
 
 Configure the shared generated client using `client.setConfig(...)`, or create per-call clients using `createClient(...)`.
 
-| Attribute | Default | Description |
-| --------- | ------- | ----------- |
-| `baseUrl` | `https://pg-atlas-backend-h8gen.ondigitalocean.app` | The root URL of the PG Atlas API. |
-| `Authorization` header | `unset` | Bearer token used for authenticated requests (for example GitHub OIDC JWT on ingest endpoints). |
-
-_SDK Maintainers: the API base URL is defined once in `src/api-config.json` and consumed by update/generation tooling._
+| Attribute              | Default                                             | Description                                                                                     |
+| ---------------------- | --------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `baseUrl`              | `https://pg-atlas-backend-h8gen.ondigitalocean.app` | The root URL of the PG Atlas API.                                                               |
+| `Authorization` header | `unset`                                             | Bearer token used for authenticated requests (for example GitHub OIDC JWT on ingest endpoints). |
 
 ## License
 

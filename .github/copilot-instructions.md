@@ -54,6 +54,7 @@ publishes them to NPM. Manual interventions by devs must be kept to a minimum.
 ## Project Layout
 
 Docs scope:
+
 - README.md — User-facing SDK examples and tips.
 - publish.md — Release instructions for SDK maintainers.
 - src/api-config.json — Single source of truth for API base URL used by runtime and generation scripts.
@@ -62,6 +63,7 @@ Docs scope:
 - .github/workflows/manual-release.yml — Manual release pipeline with update -> rewrite-tests -> test -> build.
 
 Source code:
+
 - src/index.ts — Generated-first package entrypoint; re-export generated modules and client helpers.
 - src/generated/ — Fully generated client/types/sdk output; do not hand-edit.
 

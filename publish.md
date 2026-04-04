@@ -1,6 +1,16 @@
 # Publishing `@pg-atlas/sdk`
 
+_SDK Maintainers: the API base URL is defined once in `src/api-config.json` and consumed by update/generation tooling._
+
 Wait for the API deployment to complete before releasing. The latest `openapi.json` must be available.
+
+## One-Time Setup
+
+Activate pre-commit hooks:
+
+```sh
+pre-commit install
+```
 
 ## Local Validation
 
