@@ -18,7 +18,7 @@ describe('PG Atlas SDK generated contract tests', () => {
     requestOptions: Record<string, unknown>;
   }> = [
   {
-    "functionName": "getContributor",
+    "functionName": "getContributorContributorsContributorIdGet",
     "httpMethod": "GET",
     "expectedPath": "/contributors/101",
     "requestOptions": {
@@ -28,23 +28,13 @@ describe('PG Atlas SDK generated contract tests', () => {
     }
   },
   {
-    "functionName": "getMetadata",
+    "functionName": "getMetadataMetadataGet",
     "httpMethod": "GET",
     "expectedPath": "/metadata",
     "requestOptions": {}
   },
   {
-    "functionName": "getProject",
-    "httpMethod": "GET",
-    "expectedPath": "/projects/demo-id",
-    "requestOptions": {
-      "path": {
-        "canonical_id": "demo-id"
-      }
-    }
-  },
-  {
-    "functionName": "getProjectDependsOn",
+    "functionName": "getProjectDependsOnProjectsCanonicalIdDependsOnGet",
     "httpMethod": "GET",
     "expectedPath": "/projects/demo-id/depends-on",
     "requestOptions": {
@@ -54,7 +44,7 @@ describe('PG Atlas SDK generated contract tests', () => {
     }
   },
   {
-    "functionName": "getProjectHasDependents",
+    "functionName": "getProjectHasDependentsProjectsCanonicalIdHasDependentsGet",
     "httpMethod": "GET",
     "expectedPath": "/projects/demo-id/has-dependents",
     "requestOptions": {
@@ -64,7 +54,17 @@ describe('PG Atlas SDK generated contract tests', () => {
     }
   },
   {
-    "functionName": "getProjectRepos",
+    "functionName": "getProjectProjectsCanonicalIdGet",
+    "httpMethod": "GET",
+    "expectedPath": "/projects/demo-id",
+    "requestOptions": {
+      "path": {
+        "canonical_id": "demo-id"
+      }
+    }
+  },
+  {
+    "functionName": "getProjectReposProjectsCanonicalIdReposGet",
     "httpMethod": "GET",
     "expectedPath": "/projects/demo-id/repos",
     "requestOptions": {
@@ -74,17 +74,7 @@ describe('PG Atlas SDK generated contract tests', () => {
     }
   },
   {
-    "functionName": "getRepo",
-    "httpMethod": "GET",
-    "expectedPath": "/repos/demo-id",
-    "requestOptions": {
-      "path": {
-        "canonical_id": "demo-id"
-      }
-    }
-  },
-  {
-    "functionName": "getRepoDependsOn",
+    "functionName": "getRepoDependsOnReposCanonicalIdDependsOnGet",
     "httpMethod": "GET",
     "expectedPath": "/repos/demo-id/depends-on",
     "requestOptions": {
@@ -94,7 +84,7 @@ describe('PG Atlas SDK generated contract tests', () => {
     }
   },
   {
-    "functionName": "getRepoHasDependents",
+    "functionName": "getRepoHasDependentsReposCanonicalIdHasDependentsGet",
     "httpMethod": "GET",
     "expectedPath": "/repos/demo-id/has-dependents",
     "requestOptions": {
@@ -104,7 +94,17 @@ describe('PG Atlas SDK generated contract tests', () => {
     }
   },
   {
-    "functionName": "getSbomSubmission",
+    "functionName": "getRepoReposCanonicalIdGet",
+    "httpMethod": "GET",
+    "expectedPath": "/repos/demo-id",
+    "requestOptions": {
+      "path": {
+        "canonical_id": "demo-id"
+      }
+    }
+  },
+  {
+    "functionName": "getSbomSubmissionIngestSbomSubmissionIdGet",
     "httpMethod": "GET",
     "expectedPath": "/ingest/sbom/101",
     "requestOptions": {
@@ -114,13 +114,13 @@ describe('PG Atlas SDK generated contract tests', () => {
     }
   },
   {
-    "functionName": "health",
+    "functionName": "healthHealthGet",
     "httpMethod": "GET",
     "expectedPath": "/health",
     "requestOptions": {}
   },
   {
-    "functionName": "ingestSbom",
+    "functionName": "ingestSbomIngestSbomPost",
     "httpMethod": "POST",
     "expectedPath": "/ingest/sbom",
     "requestOptions": {
@@ -130,19 +130,19 @@ describe('PG Atlas SDK generated contract tests', () => {
     }
   },
   {
-    "functionName": "listProjects",
+    "functionName": "listProjectsProjectsGet",
     "httpMethod": "GET",
     "expectedPath": "/projects",
     "requestOptions": {}
   },
   {
-    "functionName": "listRepos",
+    "functionName": "listReposReposGet",
     "httpMethod": "GET",
     "expectedPath": "/repos",
     "requestOptions": {}
   },
   {
-    "functionName": "listSbomSubmissions",
+    "functionName": "listSbomSubmissionsIngestSbomGet",
     "httpMethod": "GET",
     "expectedPath": "/ingest/sbom",
     "requestOptions": {}
